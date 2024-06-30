@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 viewEngine(app)
 initWebRoutes(app)
-
+//kết nối database
 connectDB();
 
 let port = process.env.PORT || 69696;
