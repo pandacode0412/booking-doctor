@@ -5,8 +5,11 @@ let router = express.Router();
 
 let initWebRoutes = (app) => {
     router.get("/", homeController.getHomePage)
-    router.get("/", homeController.getAboutPage)
+    router.get("/about", homeController.getAboutPage)
+    // router.get('/crud' , homeController.get)
     router.get('/get-crud' , homeController.displayCRUD)
+    // router.post('/post-crud' , homeController.postCRUD)
+    router.get("/edit-crud")
 
 
     return app.use("/", router)
