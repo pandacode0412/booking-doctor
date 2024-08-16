@@ -4,11 +4,18 @@ import logo from '../../assets/logo.svg'
 
 import './HomeHeader.scss';
 import {FormattedMessage} from 'react-intl'
+import {LANGUAGES} from '../../utils'
+
+import {changeLanguageApp} from "../../store/actions"
 
 class HomeHeader extends Component {
 
+    changeLanguage = (language) => {
+        this.props.changeLanguageAppRedux(language)
+    } 
+
     render() {
-        const { processLogout } = this.props;
+        let language = this.props.language;
 
         return (
          <React.Fragment>
@@ -40,8 +47,8 @@ class HomeHeader extends Component {
                  <div className='support'><i className='fas fa-question-circle'>Hỗ trợ</i>
                  <FormattedMessage id="homeheader.support" />
                  </div>
-                   <div className="language-vi">VN</div>
-                   <div className="language-en">EN</div>
+                   <div className={language === LANGUAGES.VI ? "language-vi active":"language-vi"}><span onClick={()=> this.changeLanguage(LANGUAGES.VI)}>VN</span></div>
+                   <div className={language === LANGUAGES.VI ? "language-en active":"language-en"}><span onClick={()=> this.changeLanguage(LANGUAGES.EN)}>EN</span></div>
                    </div>
                 </div>
             </div>
@@ -77,7 +84,7 @@ class HomeHeader extends Component {
                             <div className="text-child"><FormattedMessage id="banner.child5"/></div>
                          </div>
                          <div className="option-child">
-                            <div className="icon-child"><i className="fas fa-tooth"></i></div>
+                            <div className="icon-child"><i className="fas fa-briefcase-medical"></i></div>
                             <div className="text-child"><FormattedMessage id="banner.child6"/></div>
                          </div>
                     </div>
@@ -98,8 +105,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        processLogout: () => dispatch(actions.processLogout()),
-    };
+       changeLanguageAppRedux: (language) => dispatch(changeLanguageApp(language))
 };
-
+};
 export default connect(mapStateToProps, mapDispatchToProps)(HomeHeader);
