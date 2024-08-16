@@ -10,23 +10,44 @@ class Specialty extends Component {
 
     render() {
 
-        let settings = {
-            dots:false,
-            infinite:true,
-            speed:500,
-            slidesToShow:1,
-            slidesToScroll:1
-        }
+        // let settings = {
+        //     dots:false,
+        //     infinite:true,
+        //     speed:500,
+        //     slidesToShow:4,
+        //     slidesToScroll:1
+        // }
 
 
       return (
         <div>
             
-            <div className="section-specialty">
-                 <div className="specialty-content">
-                         <Slider {...settings}>
-
-                         </Slider>
+            <div className="section-share section-specialty">
+                 <div className="section-container">
+                      <div className="section-header">
+                           <span className="title-section">Chuyên khoa phổ biến</span>
+                           <button className="btn-section">xem them</button>
+                      </div>
+                      <div className="section-body">
+                      <Slider {...this.props.settings}>
+                           <div className="section-customize">
+                                <div className="bg-image section-specialty"></div>
+                                <div>Cơ xương khơp1</div>
+                           </div>
+                           <div className="section-customize">
+                                <div className="bg-image section-specialty"></div>
+                                <div>Cơ xương khơp1</div>
+                           </div>
+                           <div className="section-customize">
+                                <div className="bg-image section-specialty"></div>
+                                <div>Cơ xương khơp1</div>
+                           </div>
+                           <div className="section-customize">
+                                <div className="bg-image section-specialty"></div>
+                                <div>Cơ xương khơp1</div>
+                           </div>
+                       </Slider>
+                      </div>
                  </div>
             </div>
         </div>
