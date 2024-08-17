@@ -4,7 +4,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import UserManage from '../containers/System/UserManage';
 import ProductManage from '../containers/System/ProductManage';
 import RegisterPackageGroupOrAcc from '../containers/System/RegisterPackageGroupOrAcc';
-import UserRedux from '../containers/System/UserRedux';
+import UserRedux from '../containers/System/Admin/UserRedux';
 
 class System extends Component {
     render() {
