@@ -21,6 +21,20 @@
         "child5":"Mental health",
         "child6":"Dental examination"
     },
+    "manage-user" : {
+        "add":"Add a new user ",
+        "email":"Email",
+        "password":"Password",
+        "first-name": "First name",
+        "last-name": "Last name",
+        "phone-number":"Phone number",
+        "address": "Address",
+        "gender":"Gender",
+        "position":"Position",
+        "role":"Role",
+        "image":"Avatar",
+        "save":"Save user"
+    },
     
     "menu": {
         "system": {
