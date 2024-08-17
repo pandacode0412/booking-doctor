@@ -8,7 +8,8 @@
         "select-doctor":"Choose a good doctor",
         "fee":"Checkup package",
         "check-health":"General health check",
-        "support":"Support"
+        "support":"Support",
+        "welcome":"welcome,"
     },
     "banner" : {
         "title1" : "MEDICAL BACKGROUND",
@@ -19,6 +20,35 @@
         "child4":"Medical test",
         "child5":"Mental health",
         "child6":"Dental examination"
+    },
+    
+    "menu": {
+        "system": {
+            "header": "System",
+            "system-administrator": {
+                "header": "System Administrator",
+                "user-manage": "User manage",
+                "user-redux": "Manage user using redux",
+                "register-package-group-or-account": "Register service package for group/account"
+            },
+            "system-parameter": {
+                "header": "System-parameter"
+            }
+        },
+        "admin" : {
+            "manage-user" : "Users System",
+            "manage-doctor" : "Manage doctors",
+            "manage-admin" : "Manage admins",
+            "crud" : "CRUD user",
+            "crud-redux":"CRUD Redux",
+            "clinic":"Clinics",
+            "manage-clinic":"Manage clinics",
+            "speciality":"Specialties",
+            "manage-speciality":"Manage specialties",
+            "handbook":"Handbook",
+            "manage-handbook":"Manage handbook"
+
+        }
     },
     "common": {
         "add": "Add",
@@ -46,20 +76,7 @@
         "password": "Password",
         "userpass-wrong": "Invalid username or password!"
     },
-    "menu": {
-        "system": {
-            "header": "System",
-            "system-administrator": {
-                "header": "System Administrator",
-                "user-manage": "User manage",
-                "product-manage": "Package manage",
-                "register-package-group-or-account": "Register service package for group/account"
-            },
-            "system-parameter": {
-                "header": "System-parameter"
-            }
-        }
-    },
+   
     "system": {
         "user-manage": {
             "fail-to-load-fouser": "Fail to load system users list",
