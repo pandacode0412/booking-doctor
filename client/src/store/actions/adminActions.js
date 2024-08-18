@@ -1,4 +1,4 @@
-import { getAllCodeService } from '../../services/userService';
+import { getAllCodeService , createNewUserService } from '../../services/userService';
 import actionTypes from './actionTypes';
 
 export const adminLoginSuccess = (adminInfo) => ({
@@ -69,6 +69,23 @@ export const fetchRoleStart = () => {
         } catch (error) {
              dispatch(fetchRoleFailed()) 
              console.log('fetchRoleFailed error' , error)        
+        }
+    }
+}
+
+export const createNewUser = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await createNewUserService(data)
+            if(res && res.errCode === 0) {
+                dispatch(saveUserSuccess())
+            }else {
+                dispatch(saveUserFailed())
+            }
+        } catch (error) {
+             dispatch(saveUserFailed())       
+             console.log("saveUserFailed" , error)  
         }
     }
 }

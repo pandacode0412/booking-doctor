@@ -306,12 +306,12 @@ class UserRedux extends Component {
                           <div className="col-3">
                                  <label><FormattedMessage id="manage-user.role" /></label>
                                  <select  className="form-control"
-                                  onChange={(event)=>{this.onChangeInput(event,'gender')}}
+                                  onChange={(event)=>{this.onChangeInput(event,'role')}}
                                  >
                                  {roles && roles.length > 0 && 
                                         roles.map((item, index)=> {
                                             return(
-                                                <option key={index}>{language === LANGUAGES.VI ? item.valueVi :item.valueEn}</option>
+                                                <option key={index} value={item.key}>{language === LANGUAGES.VI ? item.valueVi :item.valueEn}</option>
                                             )
                                         })
                                       }
@@ -332,7 +332,9 @@ class UserRedux extends Component {
                                 </div>
                           </div>
                           <div className="col-12 mt-3">
-                               <button className="btn btn-primary"><FormattedMessage id="manage-user.save" /></button>
+                               <button className="btn btn-primary"
+                                onClick={() => this.handleSaveUser()}
+                               ><FormattedMessage id="manage-user.save" /></button>
                           </div>
                         </div>
                      </div>
@@ -367,7 +369,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getGenderStart: () => dispatch(actions.fetchGenderStart()),
         getPositonStart: () => dispatch(actions.fetchPositionStart()),
-        getRoleStart: () => dispatch(actions.fetchRoleStart())
+        getRoleStart: () => dispatch(actions.fetchRoleStart()),
+        createNewUser : (data) => dispatch(actions.createNewUser(data))
     };
 };
 
