@@ -31,41 +31,45 @@ class TableManageUser extends Component {
         this.props.deleteAUserRedux(user.id)
     }
 
-    handleChangeLanguage = (language) => {
-        this.props.handleChangeLanguageAppRedux(language)
-    }
+   
 
     render() {
-        const { processLogout , language , userInfo } = this.props;
-
+        let arrUsers = this.state.userRedux
         return (
-            <div className="header-container">
-                {/* thanh navigator */}
-                <div className="header-tabs-container">
-                    <Navigator menus={adminMenu} />
-                </div>
-                <div className="languages">
-                   <span className="welcome">
-                         <FormattedMessage id="homeheader.welcome" />
-                         {userInfo && userInfo.firstName? userInfo.firstName:''} !
-                   </span>
-                   <span className={language === LANGUAGES.VI ? "language-vi active" : "language-vi"}
-                         onClick={()=> this.handleChangeLanguage(LANGUAGES.VI)}
-                   >
-                            VN
-                   </span>
-                   <span className={language === LANGUAGES.EN ? "language-en active" : "language-en"}
-                         onClick={()=> this.handleChangeLanguage(LANGUAGES.EN)}
-                   >
-                            VN
-                   </span>
-                </div>
-
-                {/* nút logout */}
-                <div className="btn btn-logout" onClick={processLogout}>
-                    <i className="fas fa-sign-out-alt"></i>
-                </div>
-            </div>
+            
+              <table id="TableMangeUser">
+                    <tbody>
+                        <tr>
+                            <th>Email</th>
+                            <th>First name</th>
+                            <th>Last Name</th>
+                            <th>Address</th>
+                            <th>Actions</th>
+                        </tr>
+                        {
+                            arrUsers && arrUsers.length > 0 &&
+                            arrUsers.map((item, index) => {
+                                return (
+                                    <tr key={index}>
+                                        <td>{item.email}</td>
+                                        <td>{item.firstName}</td>
+                                        <td>{item.lastName}</td>
+                                        <td>{item.address}</td>
+                                        <td>
+                                            <button className=""btn-edit><i className="fas fa-pencil-alt"></i></button>
+                                            <button
+                                              onClick={() => this.handleDeleteUser(item)}
+                                              className="btn-delete"
+                                            >
+<i className="fas fa-trash"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+              </table>
         );
     }
 
@@ -73,9 +77,7 @@ class TableManageUser extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn,
-        language:state.app.language,
-        userInfo = state.user.userInfo
+    listUsers:state.admin.users
     };
 };
 
