@@ -5,6 +5,7 @@ import * as actions from "../../store/actions";
 import { LANGUAGES } from '../../utils';
 import {FormattedMessage} from 'react-intl';
 import UserRedux from './UserRedux';
+import './TableManageUser.scss'
 
 class TableManageUser extends Component {
 
@@ -83,9 +84,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        processLogout: () => dispatch(actions.processLogout()),
-        changeLanguageAppRedux:(language)=>dispatch(actions.changeLanguageApp(language))
-    };
+       fetchUserRedux: () =>  dispatch(actions.fetchAllUsersStart()),
+       deleteAUserRedux : (id) => dispatch(actions.deleteAUser(id))
+};
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableManageUser);
