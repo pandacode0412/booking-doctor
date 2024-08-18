@@ -251,7 +251,7 @@ class UserRedux extends Component {
                     this.state.isOpen === true && 
                         <Lightbox
                                mainSrc={this.state.previewImgURL}
-                               
+                               onCloseRequest={()=>this.setState({isOpen:false})}
                         
                         />
                   }
@@ -266,13 +266,18 @@ const mapStateToProps = state => {
         // isLoggedIn:state.user.isLoggedIn,
         // userInfo:state.user.userInfo,
         language:state.app.language,
-        genderRedux:state.admin.genders
+        genderRedux:state.admin.genders,
+        roleRedux : state.admin.roles,
+        positionRedux:state.admin.positions,
+        isLoadingGender:state.admin.isLoadingGender
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        getGenderStart: () => dispatch(actions.fetchGenderStart())
+        getGenderStart: () => dispatch(actions.fetchGenderStart()),
+        getPositonStart: () => dispatch(actions.fetchPositionStart()),
+        getRoleStart: () => dispatch(actions.fetchRoleStart())
     };
 };
 
