@@ -27,9 +27,41 @@ const adminReducer = (state = initialState, action) => {
                 
             }
         case actionTypes.FETCH_GENDER_FAILED:
+            state.isLoadingGender = false;
+            state.genders = []
             return {
                 ...state,
             }
+            case actionTypes.FETCH_POSITION_START:
+                let copyState = {...state}
+                copyState.isLoadingGender = true;
+    
+                return {
+                    ...state,
+                   
+                }
+            case actionTypes.FETCH_POSITION_SUCCESS:
+                state.poitions = action.data
+                return {
+                    ...state,
+                    
+                }
+            case actionTypes.FETCH_POSITION_FAILED:
+                state.poitions = []
+                return {
+                    ...state,
+                }
+                case actionTypes.FETCH_ROLE_SUCCESS:
+                    state.roles = action.data
+                    return {
+                        ...state,
+                        
+                    }
+                case actionTypes.FETCH_ROLE_FAILED:
+                    state.roles = []
+                    return {
+                        ...state,
+                    }
         default:
             return state;
     }
@@ -60,4 +92,4 @@ const adminReducer = (state = initialState, action) => {
 //     }
 // }
 
-export default appReducer;
+export default adminReducer;
