@@ -233,8 +233,12 @@ class UserRedux extends Component {
                                      <input id ="previewImg" type="file" hidden 
                                        onChange={(event) => this.handleOnChangeImage(event)}
                                      />
-                                     <label className="label-upload" htmlFor></label>
-
+                                     <label className="label-upload" htmlFor = "previewImg">Tải ảnh<i className="fas fa-upload"></i></label>
+                                     <div className="preview-image"
+                                         style={{backgroundImage:`url(${this.state.previewImgURL})`}}
+                                         onClick={()=> this.openPreviewImage()}
+                                         >
+                                     </div>
                                 </div>
                           </div>
                           <div className="col-12 mt-3">
@@ -243,6 +247,14 @@ class UserRedux extends Component {
                         </div>
                      </div>
                  </div>
+                  {
+                    this.state.isOpen === true && 
+                        <Lightbox
+                               mainSrc={this.state.previewImgURL}
+                               
+                        
+                        />
+                  }
             </div>
         );
     }
