@@ -94,7 +94,7 @@ export const createNewUser = (data) => {
     }
 }
 
-export const saveUserSuccess = (roleData) => ({
+export const saveUserSuccess = () => ({
     type: actionTypes.CREATE_USER_SUCCESS,
 })
 
@@ -119,3 +119,64 @@ export const fetchGenderFailed = () => ({
     data:genderData
 })
     
+
+export const saveUserFailed = () => ({
+    type: actionTypes.CREATE_USER_FAILED,
+})
+
+export const fetchAllUsersStart = () => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await getAllUsers("ALL")
+            if(res && res.errCode === 0) {
+                
+                dispatch(fectchAllUsersSuccess(res.users.reverse()));
+            }else {
+                toast.error("Fetch all users error")
+                dispatch(fetchAllUsersFailed())
+            }
+        } catch (error) {
+            toast.error("Fetch all users error!")
+            dispatch(fetchAllUsersFailed());
+            console.log('fetchAllUsersFailed  error' , error)
+        }
+    }
+}
+
+export const fetchAllSuccess = (data) => ({
+    type: actionTypes.FETCH_ALL_USERS_SUCCESS,
+    users: data
+})
+
+export const fetchAllFailed = () => ({
+    ttype: actionTypes.FETCH_ALL_USERS_FAILED,
+})
+    
+export const deleteAUser = (userId) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await deleteUserService(userId)
+            if(res && res.errCode === 0) {
+                toast.success("Delete the user succeed!")
+                dispatch(deleteUserSuccess());
+            }else {
+                toast.error("Delete  the users error")
+                dispatch(deleteUserFailed())
+            }
+        } catch (error) {
+            toast.error("Delete the users error!")
+            dispatch(deleteUserFailed());
+            console.log('saveUserFailed  error' , error)
+        }
+    }
+}
+export const deleteUserSuccess = () => ({
+    type:actionTypes.DELETE_USER_SUCCESS
+})
+
+export const deleteUserFailed = () => ({
+    type:actionTypes.DELETE_USER_FAILED
+})
+
