@@ -1,5 +1,7 @@
-import { getAllCodeService , createNewUserService } from '../../services/userService';
+import { getAllCodeService , createNewUserService ,getAllUsers, deleteUserService} from '../../services/userService';
 import actionTypes from './actionTypes';
+
+import {toast} from "react-toastify"
 
 export const adminLoginSuccess = (adminInfo) => ({
     type: actionTypes.ADMIN_LOGIN_SUCCESS,
@@ -79,7 +81,9 @@ export const createNewUser = (data) => {
 
             let res = await createNewUserService(data)
             if(res && res.errCode === 0) {
+                toast.success("Create a new user succeed!")
                 dispatch(saveUserSuccess())
+                dispatch(fectchAllUsersStart());
             }else {
                 dispatch(saveUserFailed())
             }
@@ -90,7 +94,9 @@ export const createNewUser = (data) => {
     }
 }
 
-
+export const saveUserSuccess = (roleData) => ({
+    type: actionTypes.CREATE_USER_SUCCESS,
+})
 
 export const fetchRoleSuccess = (roleData) => ({
     type: actionTypes.FETCH_ROLE_SUCCESS,
