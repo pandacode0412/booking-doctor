@@ -2,13 +2,39 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {FormattedMessage} from 'react-intl'
 import Slider from "react-slick"
+import * as actions from '../../../store/actions'
+import {LANGUAGES} from '../../../utils'
 
 
 class OutStandingDoctor extends Component {
 
+    constructor(props) {
+        super(props){
+            this.state={
+                arrDoctors:[]
+            }
+        }
+    }
+
+    componentDidUpdate(prevProps , prevState , snapshot) {
+        if(prevProps.toDoctorsRedux !== this.props.topDoctorsRedux) {
+            this.setState({
+                arrDoctors:this.props.topDoctorsRedux
+            })
+        }
+    }
+
+    componetDidMount() {
+        this.props.loadTopDoctors();
+    }
+
     render() {
-       
+        let arrDoctors = this.state.arrDoctors
+        let {language} = this.props
+        arrDoctors =arrDoctors.concat(arrDoctors).concat(arrDoctors)
+
       return (
+        
         <div className="section-share section-outstanding-doctor">
             <div className="section-container ">
                 <div className="section-header">
@@ -17,7 +43,25 @@ class OutStandingDoctor extends Component {
                      <button className="btn-section">xem thêm</button>
                 </div>
                 <div className="section-body">
-                   <Slider {...this.props.settings}>
+                   <Slider {...this.props.settings}> 
+                    {
+                        arrDoctors && arrDoctors.length > 0 
+                             && arrDoctors.map((item , index)=> {
+                                let imageBase64= '',
+                                if(item.image) {
+                                    imageBase64 = new ArrayBuffer(item.image,'base64').toString('binary');
+
+                                }
+                                let nameVi =`${item.positionData.valueVi}, ${item.lastName} ${item.firstName}`
+                                let nameEn =`${item.positionData.valueEn}, ${item.lastName} ${item.firstName}`
+
+                                return (
+                                    <div className="section-customize" key={index}> 
+                                        
+                                     </div>
+                                )
+                            })
+                    }
                          <div className="section-customize">
                                <div className="customize-border">
                                 <div className="outer-bg">
