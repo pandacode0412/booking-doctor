@@ -9,11 +9,11 @@ import {LANGUAGES} from '../../../utils'
 class OutStandingDoctor extends Component {
 
     constructor(props) {
-        super(props){
+        super(props);
             this.state={
                 arrDoctors:[]
             }
-        }
+        
     }
 
     componentDidUpdate(prevProps , prevState , snapshot) {
@@ -31,7 +31,7 @@ class OutStandingDoctor extends Component {
     render() {
         let arrDoctors = this.state.arrDoctors
         let {language} = this.props
-        arrDoctors =arrDoctors.concat(arrDoctors).concat(arrDoctors)
+        // arrDoctors =arrDoctors.concat(arrDoctors).concat(arrDoctors)
 
       return (
         
@@ -39,8 +39,12 @@ class OutStandingDoctor extends Component {
             <div className="section-container ">
                 <div className="section-header">
                      
-                     <span className="title-section">Cơ sở y tế nổ bật</span>
-                     <button className="btn-section">xem thêm</button>
+                     <span className="title-section">
+                        <FormattedMessage id="homepage.outstanding-doctor" />
+                     </span>
+                     <button className="btn-section">
+                     <FormattedMessage id="homepage.more-infor" />
+                     </button>
                 </div>
                 <div className="section-body">
                    <Slider {...this.props.settings}> 
@@ -57,31 +61,25 @@ class OutStandingDoctor extends Component {
 
                                 return (
                                     <div className="section-customize" key={index}> 
-                                        
+                                        <div className="customize-border">
+                                                  <div className="section-border">
+                                                        <div className="outer-bg">
+                                                             <div className="bg-image section-outstading-doctor"
+                                                                style={{backgroundImage:`url(${imageBase64})`}}
+                                                             >
+
+                                                             </div>
+                                                        </div>
+                                                        <div className="position text-center">
+                                                              <div>{language === LANGUAGES.VI ? nameVi:nameEn}</div>
+                                                              <div>Cơ Xương khớp</div>
+                                                        </div>
+                                                  </div>
+                                        </div>
                                      </div>
                                 )
                             })
                     }
-                         <div className="section-customize">
-                               <div className="customize-border">
-                                <div className="outer-bg">
-                                    <div className="bg-image section-outstading-doctor"></div>
-                                </div>
-                                <div className="position text-center">
-                                    <div>Giáo sư, Tiến Sĩ Hỏi Dân IT</div>
-                                    <div>Cơ Xương Khớp</div>
-                                </div>
-
-                               </div>
-                         </div>
-                         <div className="section-customize">
-                                <div className="bg-image section-mediacl-facility"></div>
-                                <div>Cơ Xương khớp 1</div>
-                         </div>
-                         <div className="section-customize">
-                                <div className="bg-image section-mediacl-facility"></div>
-                                <div>Cơ Xương khớp 1</div>
-                         </div>
                    </Slider>
                 </div>
 
@@ -94,13 +92,15 @@ class OutStandingDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
+        language:state.app.language,
+        topDoctorsRedux:state.admin.topDoctors,
         isLoggedIn: state.user.isLoggedIn
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        processLogout: () => dispatch(actions.processLogout()),
+       loadTopDoctors: ()=> dispatch(actions.fetchTopDoctor())
     };
 };
 
