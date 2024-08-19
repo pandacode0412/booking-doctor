@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      contentHTLM: {
+      contentHTML: {
         type: Sequelize.TEXT('long')
       },
       contentMarkdown: {
