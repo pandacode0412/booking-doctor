@@ -87,7 +87,7 @@ const adminReducer = (state = initialState, action) => {
                             ...state,
                         }
                         case actionTypes.FETCH_ALL_DOCTORS_SUCCESS:
-                            state.allDoctors = action.dataDoctors
+                            state.allDoctors = action.dataDr
                             return {
                                 ...state,
                                 

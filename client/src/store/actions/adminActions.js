@@ -242,7 +242,7 @@ export const fetchAllDoctor = () => {
             if(res && res.errCode === 0) {
                 dispatch({
                     type:actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
-                    dataDoctors:res.data
+                    dataDr:res.data
                 })
             }else {
                 dispatch({

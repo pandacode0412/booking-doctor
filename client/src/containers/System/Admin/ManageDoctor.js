@@ -9,6 +9,7 @@ import './TableManageUser.scss'
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css'
+import { fetchAllDoctor } from '../../../store/actions/adminActions';
 
 
 
@@ -25,16 +26,47 @@ class ManageDoctor extends Component {
             contentMarkdown:'',
             contentHTML:'',
             selectedOption:'',
-            description:''
+            description:'',
+            listDoctors:[]
         }
     }
 
     componentDidMount() {
+        this.props.fetchAllDoctors()
         
     }
 
+    buildDataInputSelect = (inputData) => {
+        let result = [];
+        let {language} = this.props;
+        if(inputData && inputData.lenght > 0)
+        {
+           inputData.map((item , index) => {
+            let object = {};
+
+            let labelVi =`${item.lastName} ${item.firstName}`
+            let labelEn =`${item.firstName} ${item.lastName}`
+            object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+            object.value = item.id;
+            result.push(object)
+           })
+        }
+
+        return result
+    }
+
     componentDidUpdate(prevProps , prevState , snapshot) {
-        
+        if(prevProps.allDoctors !== this.props.allDoctors) {
+            this.setState({
+                listDoctors:dataSelect
+            })
+        }
+        if(prevProps.language !== this.props.language) {
+             let dataSelect = this.buildDataInputSelect(this.props.allDoctors)
+             this.setState({
+                listDoctors:dataSelect
+             })
+        }
     }
 
     handleEditorChange = ({html, text}) => {
@@ -103,14 +135,14 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
-    listUsers:state.admin.users
+       allDoctors: state.admin.allDoctors
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-       fetchUserRedux: () =>  dispatch(actions.fetchAllUsersStart()),
-       deleteAUserRedux : (id) => dispatch(actions.deleteAUser(id))
+       fetchAllDoctors: (id) =>  dispatch(actions.fetchAllDoctors()),
+     
 };
 };
 
