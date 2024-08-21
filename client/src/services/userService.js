@@ -32,10 +32,10 @@ const getAllDoctors = () => {
     return axios.get(`/api/top-all-doctors`)
 }
 
-const saveDetailDoctor = (data) => {
+const saveDetailDoctorService = (data) => {
     return axios.post(`/api/save-infor-doctors`, data)
 }
 
 
 
-export { getAllDoctors,getTopDoctorHomeService, getAllCodeService, handleLoginApi, getAllUsers, createNewUserService, deleteUserService }
+export { saveDetailDoctorService, getAllDoctors,getTopDoctorHomeService, getAllCodeService, handleLoginApi, getAllUsers, createNewUserService, deleteUserService }

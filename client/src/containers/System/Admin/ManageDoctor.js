@@ -9,7 +9,7 @@ import './TableManageUser.scss'
 import MarkdownIt from 'markdown-it';
 import MdEditor from 'react-markdown-editor-lite';
 import 'react-markdown-editor-lite/lib/index.css'
-import { fetchAllDoctor } from '../../../store/actions/adminActions';
+import { fetchAllDoctor, saveDetailDoctor } from '../../../store/actions/adminActions';
 
 
 
@@ -76,6 +76,15 @@ class ManageDoctor extends Component {
         })
     }  
 
+    handleSaveContentMarkdown = () => {
+        this.props.saveDetailDoctor({
+            contentHTML:this.state.contentHTML,
+            contentMarkdown:this.state.contentMarkdown,
+            description:this.state.description,
+            doctorId:this.state.selectedOption.value
+        })
+    }
+
 
     handleChange = selectedOption => {
         this.setState({selectedOption})
@@ -135,7 +144,8 @@ class ManageDoctor extends Component {
 
 const mapStateToProps = state => {
     return {
-       allDoctors: state.admin.allDoctors
+       fetchAllDoctors: (id) => dispatch(actions.fetchAllDoctors()),
+       saveDetailDoctor : (data) => dispatch(actions.saveDetailDoctor(data))
     };
 };
 
