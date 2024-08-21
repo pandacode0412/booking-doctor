@@ -33,7 +33,7 @@ const getAllDoctors = () => {
 }
 
 const saveDetailDoctor = (data) => {
-    return axios.post(`/api/save-infro-doctors`, data)
+    return axios.post(`/api/save-infor-doctors`, data)
 }
 
 

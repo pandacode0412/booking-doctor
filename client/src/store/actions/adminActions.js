@@ -258,3 +258,29 @@ export const fetchAllDoctor = () => {
         }
     }
 }
+
+
+export const saveDetailDoctor = (data) => {
+    return async (dispatch, getState) => {
+        try {
+
+            let res = await  saveDetailDoctor(data)
+            if(res && res.errCode === 0) {
+                dispatch({
+                    type:actionTypes.FETCH_ALL_DOCTORS_SUCCESS,
+                    dataDr:res.data
+                })
+            }else {
+                dispatch({
+                    type:actionTypes.FETCH_ALL_DOCTORS_FAILED
+                })
+            }
+        } catch (error) {
+           
+             dispatch({
+                type:actionTypes.FETCH_ALL_DOCTORS_FAILED
+             })       
+           
+        }
+    }
+}
