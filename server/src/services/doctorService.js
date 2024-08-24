@@ -68,6 +68,14 @@ let saveDetailInforDoctor  = (inputData) => {
                         where : {doctorId:inputData.doctorId},
                         raw:false
                     })
+
+                    if(doctorMarkdown) {
+                        doctorMarkdown.contentHTML = inputData.contentHTML;
+                        doctorMarkdown.contentMarkdown = inputData.contentHTML;
+                        doctorMarkdown.description=inputData.description;
+                        doctorMarkdown.updateAt = new Date();
+                        await doctorMarkdown.save()
+                    }
                 }
 
                
