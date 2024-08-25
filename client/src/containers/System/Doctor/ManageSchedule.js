@@ -7,6 +7,7 @@ import * as actions from '../../../store/actions'
 import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
 import DatePicker from '../../../components/Input/DatePicker';
 import moment from 'moment'
+import { fetchAllDoctor } from '../../../store/actions/adminActions';
 class ManageSchedule extends Component {
 
     constructor(props) {
@@ -74,7 +75,34 @@ class ManageSchedule extends Component {
                            <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
                            <Select
                                value={this.state.selectedDoctor}
+                               onChange={this.handleChangeSelect}
+                               options={this.state.listDoctors}
                            />
+                          </div>
+                          <div className="col-6 form-group">
+                             <label><FormattedMessage id="manage-schedule.choose-date" /></label>
+                             <DatePicker
+                               onChange={this.handleChangeDatePicker}
+                               className="form-control"
+                               value={this.state.currentDate}
+                               minDate={new Date()}
+                             />
+                          </div>
+                          <div className="col-12 pick-hour-container">
+                               {rangeTime && rangeTime.length > 0 &&
+                                rangeTime.map((item,index)=> {
+                                    return(
+                                        <button className="btn btn-schedule" key={index}>
+                                            {language === LANGUAGES.VI ? item.valueVi:item.valueEn}
+                                        </button>
+                                    )
+                                })
+                               }
+                          </div>
+                          <div className="col-12">
+                             <button className="btn btn-primary btn-save-schedule">
+                                 <FormattedMessage id="manage-schedule.save" />
+                             </button>
                           </div>
                      </div>
                 </div>
@@ -86,12 +114,18 @@ class ManageSchedule extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn:state.user.isLoggedIn
+        isLoggedIn:state.user.isLoggedIn,
+        language:state.app.language,
+        allDoctors:state.admin.allDoctors,
+        allScheduleTime:state.admin.allScheduleTime
     };
 };
 
 const mapDispatchToProps = dispatch => {
+    
     return {
+        fetchAllDoctors:() => dispatch(actions.fetchAllDoctors()),
+        fetchAllScheduleTime: () => dispatch(actions.fetchAllScheduleTime())
     };
 };
 
