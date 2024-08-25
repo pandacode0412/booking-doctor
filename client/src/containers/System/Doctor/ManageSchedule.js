@@ -42,15 +42,43 @@ class ManageSchedule extends Component {
         let result = []
         let {language} = this.props
         if(inputData && inputData.length > 0) {
-            
+            inputData.map((item,index) => {
+                let object = {};
+                let labelVi = `${item.lastName} ${item.firstName}`;
+                let labelEn = `${item.firstName} ${item.lastName}`;
+                object.label = language === LANGUAGES.VI ? labelVi : labelEn;
+                object.value = item.id;
+                result.push(object)
+            })
         }
+        return result;
+    }
+
+    handleChangeSelect = async (date) => {
+        this.setState({
+            currentDate:date[0]
+        })
     }
 
     render() {
+        let {rangeTime} = this.state
+        let {language} = this.props
         return (
-            <React.Fragment>
-                <div>manage chedule</div>
-            </React.Fragment>
+            <div className="manage-schedule-container">
+                <div className="m-s-title">
+                     <label> <FormattedMessage id="manage-schedule.title" /></label>
+                </div>
+                <div className="container">
+                     <div className="row">
+                          <div className="col-6 form-group">
+                           <label><FormattedMessage id="manage-schedule.choose-doctor" /></label>
+                           <Select
+                               value={this.state.selectedDoctor}
+                           />
+                          </div>
+                     </div>
+                </div>
+            </div>
         )
     }
 
