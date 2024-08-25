@@ -66,7 +66,9 @@
             "manage-speciality":"Manage specialties",
             "handbook":"Handbook",
             "manage-handbook":"Manage handbook"
-
+        },
+        "doctor" : {
+            "manage-schedule" : "Manage Doctor`s schedule"
         }
     },
     "common": {

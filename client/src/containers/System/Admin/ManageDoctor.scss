@@ -34,6 +34,10 @@
         background: rgb(11,93,216);
         cursor: pointer;
         color: white;
+
+        &:hover {
+            opacity: 0.9;
+        }
     }
 
     .more-infor {
