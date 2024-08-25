@@ -1,14 +1,27 @@
 import React , {Component} from 'react';
 import {connect} from 'react-redux'
-import 
-
+import './ManageSchedule.scss'
+import {FormattedMessage} from 'react-intl'
+import Select from 'react-select'
+import * as actions from '../../../store/actions'
+import { CRUD_ACTIONS, LANGUAGES } from '../../../utils';
+import DatePicker from '../../../components/Input/DatePicker';
+import moment from 'moment'
 class ManageSchedule extends Component {
 
-    state = {
-
+    constructor(props) {
+        super(props)
+        this.state = {
+            listDoctors:[],
+            selectedDoctor:{},
+            currentDate:'',
+            rangeTime:[]
+        }
     }
 
     componentDidMount() {
+        this.props.fetchAllDoctors();
+        this.props.fetchAllScheduleTime();
     }
 
 
