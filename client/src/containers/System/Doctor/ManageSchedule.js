@@ -26,7 +26,23 @@ class ManageSchedule extends Component {
 
     componentDidUpdate(prevProps , prevState, snapshot) {
         if(prevProps.allDoctors !== this.props.allDoctors){
-            let dataSelect
+            let dataSelect = this.buildDataInputSelect(this.props.allDoctors)
+            this.setState({
+                listDoctors:dataSelect
+            })
+        }
+        if(prevProps.allScheduleTime !== this.props.allScheduleTime) {
+            this.setState({
+                rangeTime:this.props.allScheduleTime
+            })
+        }
+    }
+
+    buildDataInputSelect = () => {
+        let result = []
+        let {language} = this.props
+        if(inputData && inputData.length > 0) {
+            
         }
     }
 
