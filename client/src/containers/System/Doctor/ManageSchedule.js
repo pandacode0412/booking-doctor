@@ -24,6 +24,11 @@ class ManageSchedule extends Component {
         this.props.fetchAllScheduleTime();
     }
 
+    componentDidUpdate(prevProps , prevState, snapshot) {
+        if(prevProps.allDoctors !== this.props.allDoctors){
+            let dataSelect
+        }
+    }
 
     render() {
         return (
