@@ -14,7 +14,8 @@ class DetailDoctor extends Component {
     constructor(props) {
         super(props)
         this.state = {
-           allDays: []
+           allDays: [],
+           allAvalableTime:[]
         }
     }
 
@@ -23,12 +24,17 @@ class DetailDoctor extends Component {
          this.setArrDays(language)
     }
 
+    capitalizeFirstLetter(string) {
+        return string.chartAt(0).toUpperCase() + string.slice(1);
+    }
+
     setArrDays = (language) => {
         let allDays = []
         for(let i = 0 ; i<7 ; i++) {
             let object = {};
             if(language === LANGUAGES.VI) {
-                object.label = moment(new Date()).add(i,'days').format('dddd - DD/MM')
+                let labelVi =moment(new Date()).add(i,'days').format('dddd - DD/MM')
+                object.label = this.capitalizeFirstLetter(labelVi)
 
             }else {
                 object.label = moment(new Date()).add(i,'days').locale('en').format("ddd - DD/MM")
@@ -52,12 +58,17 @@ class DetailDoctor extends Component {
             let doctorId = this.props.doctorIdFromParent
             let date = event.target.value
             let res = await getScheduleDoctorByDate(doctorId, date)
+            if(res && res.errCode === 0) {
+                this.setState({
+                    allAvalableTime:res.data ? res.data : []
+                })
+            }
         }
     }
 
     render() {
-        let {allDays} = this.state
-
+        let {allDays , allAvalableTime} = this.state
+        let {language} = this.props
       
 
         return (
