@@ -14,9 +14,7 @@ import { CRUD_ACTIONS , LANGUAGES } from '../../../utils';
 import { getDetailInforDoctor } from '../../../services/userService';
 
 
-const options = [
-    {value:'chocolate',label:""}
-]
+ 
 const mdParser = new MarkdownIt();
 
 class ManageDoctor extends Component {
@@ -29,12 +27,24 @@ class ManageDoctor extends Component {
             selectedOption:'',
             description:'',
             listDoctors:[],
-            hasOldData:false
+            hasOldData:false,
+
+            //save to doctor_infor table
+            listPrice:[],
+            listPayment:[],
+            listProvince:[],
+            selectedPrice:'',
+            selectedPayment:'',
+            selectedProvince:'',
+            nameClinic:'',
+            addressClinic:'',
+            note:''
         }
     }
 
     componentDidMount() {
         this.props.fetchAllDoctors()
+        this.props.getAllRequiredDoctorInfor()
         
     }
 
