@@ -48,7 +48,7 @@ class ManageDoctor extends Component {
         
     }
 
-    buildDataInputSelect = (inputData) => {
+    buildDataInputSelect = (inputData , type) => {
         let result = [];
         let {language} = this.props;
         if(inputData && inputData.lenght > 0)
@@ -56,8 +56,8 @@ class ManageDoctor extends Component {
            inputData.map((item , index) => {
             let object = {};
 
-            let labelVi =`${item.lastName} ${item.firstName}`
-            let labelEn =`${item.firstName} ${item.lastName}`
+            let labelVi = type== 'USER'? `${item.firstName}`:`${item.firstName}`
+            let labelEn =type==  'USER'? `${item.firstName}`: `${item.lastName}`
             object.label = language === LANGUAGES.VI ? labelVi : labelEn;
             object.value = item.id;
             result.push(object)
@@ -68,7 +68,7 @@ class ManageDoctor extends Component {
     }
 
     componentDidUpdate(prevProps , prevState , snapshot) {
-        if(prevProps.allDoctors !== this.props.allDoctors) {
+        if(prevProps.allDoctors !== this.props.allDoctors , 'USERS') {
             this.setState({
                 listDoctors:dataSelect
             })
@@ -79,6 +79,19 @@ class ManageDoctor extends Component {
                 listDoctors:dataSelect
              })
         }
+        if(prevProps.allRequiredDoctorInfor !== this.props.allRequiredDoctorInfor){
+            let {resPayment , resPrice , resProvince} = this.props.allRequiredDoctorInfor;
+            let dataSelectPrice = this.buildDataInputSelect(resPrice)
+            let dataSelectPayment = this.buildDataInputSelect(resPayment)
+            let dataSelectProvince = this.buildDataInputSelect(resProvince)
+            this.setState({
+                listPrice:dataSelectPrice,
+                listPayment:dataSelectPayment,
+                listProvince:dataSelectProvince
+            })
+
+        }
+
     }
 
     handleEditorChange = ({html, text}) => {
