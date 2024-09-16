@@ -48,18 +48,18 @@ class App extends Component {
                 {/* lưu lại lịch sữ history */}
                 <Router history={history}>
                     <div className="main-container">
-                      
+                        {this.props.isLoggedIn && <Header />}
 
                         <span className="content-container">
-                            <CustomScrollbars style={{height:'100vh' , width:"100%"}}>
-                            <Switch>
-                                <Route path={path.HOME} exact component={(Home)} />
-                                <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
-                                <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)}/>
-                                <Route path={path.HOMEPAGE} component={HomePage} />
-                                <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
-                            </Switch>
+                            <CustomScrollbars style={{ height: '100vh', width: "100%" }}>
+                                <Switch>
+                                    <Route path={path.HOME} exact component={(Home)} />
+                                    <Route path={path.LOGIN} component={userIsNotAuthenticated(Login)} />
+                                    <Route path={path.SYSTEM} component={userIsAuthenticated(System)} />
+                                    <Route path={'/doctor/'} component={userIsAuthenticated(Doctor)} />
+                                    <Route path={path.HOMEPAGE} component={HomePage} />
+                                    <Route path={path.DETAIL_DOCTOR} component={DetailDoctor} />
+                                </Switch>
                             </CustomScrollbars>
                         </span>
 
