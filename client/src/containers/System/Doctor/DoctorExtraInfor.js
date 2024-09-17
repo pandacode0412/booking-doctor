@@ -45,15 +45,48 @@ class ManageSchedule extends Component {
                     <div className='detail-address'>Sài Gòn</div>
 
                 </div>
-                <div>
-                    
+                <div className="content-down">
+{
+    isShowDetailInfor === false &&
+    <div className='short-infor'>
+        GIÁ KHÁM:250.000đ.
+        <span onClick={()=>this.showHideDetailInfor(true)}>Xem chi tiết</span>
+         </div>
+}
                 </div>
          
             </div>
         )
     }
 
+    
+
 }
+
+{
+    isShowDetailInfor === true &&
+  <>
+  <div className='title-price'>GIÁ KHÁM: .</div>
+  <div className='detail-infor'>
+<div className='price'>
+ <span className='left'>Giá khám</span>
+ <span className='right'>250.000đ</span>
+</div>
+<div className='note'>
+ Được ưu tiên khám trước khi đặt khám qua Booking care
+</div>
+  </div>
+  <div className='payment'>
+   Người bệnh có thể thanh toán chi phí bằng hình thức tiền mặt và quẹt thẻ
+  </div>
+  <div className='hide-price'>
+<span onClick={()=> this.showHideDetailInfor(false)}>
+Ẩn bảng giá
+</span>
+  </div>
+  </>
+}
+     
 
 const mapStateToProps = state => {
     return {
